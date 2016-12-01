@@ -1,0 +1,25 @@
+<div>
+    <div class="title-wrapper">            
+        <div class="title">修改密码</div>
+    </div>
+    <div class="editContainer" style="max-width:400px;margin:0 auto;">
+        <form ng-submit="submit()">
+            <div class="form-element-wrapper f5">
+                <div class="l"><i>*</i>原密码</div>
+                <input class="form-control" type="password" ng-model="oldPass" required/>
+            </div>
+            <div class="form-element-wrapper f5">
+                <div class="l"><i>*</i>新密码</div>
+                <input class="form-control" type="password" ng-model="newPass" required/>
+            </div>
+            <div class="form-element-wrapper f5">
+                <div class="l"><i>*</i>确认密码</div>
+                <input class="form-control" type="password" ng-model="confirmPass" required/>
+            </div>
+            <div class="btns">
+                <button class="btn btn-primary" type="submit">修 改</button> 
+                <input type="button" class="btn btn-danger" onclick="history.go(-1)" value="返 回" />
+            </div>
+        </form>
+    </div>
+</div>

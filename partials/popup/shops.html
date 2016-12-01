@@ -1,0 +1,54 @@
+<div class="modal fade" id="{{id}}">
+    <div class="modal-dialog" style="margin-top:50px;width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <div class="modal-title">选择店铺</div>
+            </div>
+            <div class="modal-body">
+                <div class="searchContainer">
+                                          名称：<input type="text" ng-model="search.name">
+                                          状态：<select ng-model="search.status">
+                      <option value="">-所有-</option>
+                      <option value="AWAITAUDIT">待审核</option>
+                      <option value="OPENING">营业中</option>
+                      <option value="HALFTIME">休息中</option>
+                      <option value="CLOSED">关闭</option>
+                      <option value="AUDITFAILED">审核失败</option>
+                  </select>
+                                          菜场：<select ng-controller="MarketSelectCtrl" ng-model="search.marketId">
+                       <option value="">-所有-</option>   
+                      <option ng-repeat="s in $root.selectMarkets" value="{{s.id}}" ng-selected="s.id==search.marketId">{{s.name}}</option>     
+                  </select>
+                  <button class="btn btn-default" ng-click="changePage(1)" style="top:-2px;">搜 索</button>
+                </div>
+                <table class="table table-striped article-table">
+                    <thead>
+                        <tr>
+                         <th style="width:20px;"><input type="checkbox" ng-if="multiple" ng-click="checkAll($event)"/></th>
+                         <th>#</th>
+                         <th>名称</th>
+                         <th>地址</th>            
+                         <th>状态</th>
+                         <th>菜场</th>
+                        </tr>        
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="shop in data">
+                          <td><input type="{{multiple?'checkbox':'radio'}}" name="shopSelect" ng-checked="allChecked"/></td>
+                          <td>{{shop.id}}</td>
+                          <td>{{shop.name}}</td>
+                          <td>{{shop.address}}</td>
+                          <td>{{shop.status.getShopStatus()}}</td>
+                          <td>{{shop.marketId}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+                <div class="clearfix">
+                    <div style="float:left;"><input type="button" class="btn btn-default" value="确 定" /></div>
+                    <div my-popup-page></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="productView">
+    <div class="title-wrapper">            
+            <div class="title">商品信息</div>
+    </div>
+    <div class="editContainer">
+       <ul class="nav nav-tabs">
+           <li class="active"><a data-target="#p1" data-toggle="tab">基本信息</a></li>
+           <li><a data-target="#p2" data-toggle="tab">规格参数</a></li>
+           <li><a data-target="#p3" data-toggle="tab">图文详情</a></li>
+       </ul>
+       <div class="tab-content">
+           <div class="tab-pane fade in active" id="p1">
+            <form ng-submit="submit()">
+                <div class="logo">
+                    <div my-upload="data.logo"></div>
+                    商品图片
+                </div> 
+                <div class="row">
+                    <div class="form-element-wrapper col-sm-6 f3">
+                        <div class="l"><i>*</i>名称</div>
+                        <input type="text" class="form-control" ng-model="data.name" required placeholder="商品名称"/>
+                    </div>
+                    <div class="form-element-wrapper col-sm-6 f3">
+                        <div class="l">分类</div>
+                        <select class="form-control" ng-model="data.categoryName">
+                            <option ng-repeat="cat in selectCats" value="{{cat.name}}" ng-selected="data.categoryName == cat.name">{{cat.name}}</option>
+                        </select>
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="form-element-wrapper col-sm-6 f3">
+                       <div class="l"><i>*</i>价格</div>
+                       <input type="text" class="form-control" ng-model="data.unitPrice" required placeholder="1位小数"/>
+                    </div>
+                    <div class="form-element-wrapper col-sm-6 f3">
+                       <div class="l"><i>*</i>库存</div>
+                       <input type="text" class="form-control" ng-model="data.stock" required placeholder="整数"/>
+                    </div>
+                </div>     
+                <div class="row">
+                    <div class="form-element-wrapper col-sm-6 f3">
+                        <div class="l"><i>*</i>店铺</div>
+                        <div my-search="data.shop" placeholder="所属店铺"></div>
+                    </div>
+                    <div class="form-element-wrapper col-sm-6 f3">
+                        <div class="l">标签</div>
+                        <select class="form-control">
+                            <option value="1">店铺标签1</option>
+                            <option value="2">店铺标签2</option>
+                            <option value="3">店铺标签3</option>
+                        </select>
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="form-element-wrapper col-sm-6 f3">
+                        <div class="l">描述</div>
+                        <input type="text" class="form-control" placeholder="商品简介"/>
+                    </div>
+                    <div class="form-element-wrapper col-sm-6 f3">
+                        <div class="l">状态</div>
+                        <select class="form-control" ng-model="data.onSale">
+                            <option value="1">上架</option>
+                            <option value="0">下架</option>
+                        </select>
+                    </div>
+                </div>    
+                <div class="btns">
+                    <button class="btn btn-primary" type="submit">保 存</button> 
+                    <input type="button" class="btn btn-danger" onclick="history.go(-1)" value="返 回" />
+                </div>
+            </form>
+            </div>
+           <div class="tab-pane fade" id="p2">
+                <div class="row animate-fade" ng-repeat="p in prodParams">
+                    <div class="form-element-wrapper col-sm-5 f3">
+                       <div class="l"><i>*</i>名称</div>
+                       <input type="text" class="form-control" placeholder="规格名称" ng-model="p.name"/>
+                    </div>
+                    <div class="form-element-wrapper col-sm-7 f3">
+                       <div class="l"><i>*</i>内容</div>
+                       <input type="text" class="form-control" placeholder="规格值" ng-model="p.value"/>
+                    </div>
+                    <a class="btn-danger glyphicon glyphicon-remove remove" ng-click="prodParams.splice($index,1)"></a>
+                </div>  
+                <div class="btns">
+                     <span class="btn btn-warning" ng-click="prodParams.push({})">新 增</span>
+                     <span class="btn btn-primary" ng-click="save2()">保 存</span>
+                </div>
+           </div>
+           <div class="tab-pane fade" id="p3" ng-class="{preview:disabled}">
+               <div class="row animate-fade" ng-repeat="p in pics">
+                   <div ng-if="p.type==0">
+                       <div my-upload="p.value"></div>
+                   </div>
+                  <div ng-if="p.type==1">
+                      <textarea class="form-control" ng-model="p.value" placeholder="文字描述"></textarea>
+                      <div class="text" ng-repeat="text in p.value.split('\n')">{{text}}</div>
+                  </div>
+                  <a class="btn-danger glyphicon glyphicon-remove remove" ng-click="pics.splice($index,1)"></a>
+               </div>
+               <div class="btns">
+                     <button class="btn btn-warning" ng-click="pics.push({type:0,value:'images/6.png'})" ng-disabled="disabled">新增图片</button>
+                     <button class="btn btn-warning" ng-click="pics.push({type:1})" ng-disabled="disabled">新增文本</button>
+                     <button class="btn btn-info" ng-click="disabled=!disabled">{{disabled?"编辑":"预览"}}</button>
+                     <button class="btn btn-primary" onclick="alert('保存成功！')">保存</button>
+                </div>
+           </div>
+        </div>
+    </div>
+</div>

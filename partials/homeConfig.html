@@ -1,0 +1,78 @@
+<div class="container">   
+    <div class="title-wrapper">            
+        <div class="title">{{title}}</div>
+    </div>
+    <br>
+    <div class="clearfix" style="width:900px;margin:0 auto;">
+        <div class="homeView">
+            <div class="border">
+            <div ng-repeat="d in data.templateList">
+                <div ng-if="d.layoutType=='LAYOUT_BANNER'">
+                    <div id="carousel{{$index}}" class="carousel slide">
+                        <div class="carousel-inner" ng-click="showConfig($event, d, 'linklist')">
+                            <div class="item" ng-repeat="i in d.homeImageList" ng-class="{active:$index==0}">
+                                <a><img ng-src="{{i.imageUrl}}" /></a>
+                            </div>
+                        </div>
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel{{$parent.$index}}" data-slide-to="{{$index}}" ng-repeat="i in d.homeImageList" ng-class="{active:$index==0}"></li>
+                        </ol>
+                    </div>
+                </div>
+                <div ng-if="d.layoutType=='LAYOUT_TITLE'">
+                    <div class="titleView clearfix">
+                        <div class="float-left" ng-click="showConfig($event, d.textList[0], 'text')">
+                            <a ng-if="d.textList[0].homeLink!=null">{{d.textList[0].text}}</a>
+                            <span ng-if="d.textList[0].homeLink==null">{{d.textList[0].text}}</span>
+                        </div>
+                        <a ng-if="d.textList[1].homeLink!=null" ng-click="showConfig($event, d.textList[1], 'text')">{{d.textList[1].text}}</a>
+                        <span ng-if="d.textList[1].homeLink==null" ng-click="showConfig($event, d.textList[1], 'text')">{{d.textList[1].text}}</span>
+                    </div>
+                </div>
+                <div ng-if="d.layoutType=='LAYOUT_PLATE_T'">
+                    <div class="plateTView clearfix">
+                        <div class="float-left" ng-click="showConfig($event,d.homeImageList[0],'link')"><a><img ng-src="{{d.homeImageList[0].imageUrl.formatImg(160)}}" /></a></div>
+                        <div class="float-left">
+                            <a ng-click="showConfig($event,d.homeImageList[1],'link')"><img ng-src="{{d.homeImageList[1].imageUrl.formatImg(160,80)}}" /></a>
+                            <a ng-click="showConfig($event,d.homeImageList[2],'link')"><img ng-src="{{d.homeImageList[2].imageUrl.formatImg(160,80)}}" /></a>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="d.layoutType=='LAYOUT_PLATE_2'||d.layoutType=='LAYOUT_PLATE_3'">
+                    <div class="plate2View clearfix" ng-class="{plate3View:d.layoutType=='LAYOUT_PLATE_3'}">
+                        <div class="float-left" ng-repeat="i in d.homeImageList" ng-click="showConfig($event, i, 'link')"><a><img ng-src="{{i.imageUrl}}" /></a></div>
+                    </div>
+                </div>
+                <div ng-if="d.layoutType=='LAYOUT_BUTTONS'">
+                    <div class="buttonView clearfix">
+                        <div class="float-left" ng-repeat="t in d.textList" ng-click="showConfig($event, t, 'text')"><a><img /><br>{{t.text}}</a></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="saveAll" style="display:none;position:fixed;left:50%;margin-left:-510px;top:300px;"><button class="btn btn-primary" style="border-radius:30px;" ng-click="saveAll()">保存<br>修改</button></div>
+        </div>
+        <div class="popover right float-left homePop">
+            <div class="arrow" style="top: 30%;"></div>
+            <h3 class="popover-title">编辑参数</h3>
+            <div class="popover-content" ng-switch on="configType">
+                <div ng-switch-when="link">
+                    <div ng-include src="'partials/homeconfig/link.html'" ></div> 
+                </div>
+                <div ng-switch-when="linklist">
+                    <div class="line seperate">图片高度：<input type="text" class="form-control" value="{{configData.height}}" autocomplete="off"/></div>
+                    <div ng-repeat="configData in configData.homeImageList">
+                        <div ng-include src="'partials/homeconfig/link.html'" ></div>
+                    </div>
+                </div>
+                <div ng-switch-when="text">
+                    <div ng-include src="'partials/homeconfig/text.html'" ></div> 
+                </div>
+                <div ng-switch-when="">正在更新</div>
+                <div ng-switch-default>请点击左边模块</div>
+                <div ng-show="configType" style="text-align:center;"><a class="btn btn-default" ng-click="save()">确 定</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="viewSelected" ng-click="clear()"></div>
+</div>

@@ -1,0 +1,131 @@
+<div class="shopView">
+    <div class="title-wrapper">            
+            <div class="title">商家信息</div>
+    </div>
+    <div class="editContainer">
+        <form ng-submit="submit()">
+            <div class="logo">
+                    <div my-upload="data.logo"></div>
+                    店铺图标
+            </div>  
+            
+                <div class="row">
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l"><i>*</i>名称</div>
+                        <input class="form-control" type="text" ng-model="data.name" required/>
+                    </div>
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l"><i>*</i>联系电话</div>
+                        <input class="form-control" type="text" ng-model="data.contactPhone" required/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l"><i>*</i>地址</div>
+                        <input class="form-control" type="text" ng-model="data.address" required/>
+                    </div>
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l"><i>*</i>起送金额</div>
+                        <input class="form-control" type="text" ng-model="data.deliveryLimitFee" placeholder="整数" required/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l"><i>*</i>配送费</div>
+                        <input class="form-control" type="text" ng-model="data.deliveryFee" placeholder="整数" required/>
+                    </div>
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l">营业时间</div>
+                        <div class="time">
+                            <div class="lt">
+                                <select class="form-control f1" type="text">
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9" selected>09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
+                                :
+                                <select class="form-control f2" type="text">
+                                    <option value="0">00</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                </select>
+                            </div> 
+                            - 
+                            <div class="rt">
+                                <select class="form-control f1" type="text">
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20" selected>20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                                :
+                                <select class="form-control f2" type="text">
+                                    <option value="0">00</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                </select>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l ls">银行卡开户行</div>
+                        <input class="form-control" type="text" ng-model="data.payeeBank"/>
+                    </div>
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l ls">银行卡持卡人</div>
+                        <input class="form-control" type="text" ng-model="data.payeeName"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l ls">银行卡账号</div>
+                        <input class="form-control" type="text" ng-model="data.payeeNo"/>
+                    </div>
+                    <div class="col-sm-6 form-element-wrapper">
+                        <div class="l">状态</div>
+                            <select class="form-control" ng-model="data.status">
+                                <option value="AWAITAUDIT">待审核</option>
+                                <option value="OPENING">营业中</option>
+                                <option value="HALFTIME">休息中</option>
+                                <option value="CLOSED">关闭</option>
+                            </select>
+                    </div>      
+                </div>
+                <div class="row">
+                    <div class="form-element-wrapper">
+                        <div class="l">公告</div> 
+                        <input class="form-control" type="text" ng-model="data.notice"/>
+                    </div>
+                </div>
+                <div class="btns">
+                    <button class="btn btn-primary" type="submit">保 存</button> 
+                    <input type="button" class="btn btn-danger" onclick="history.go(-1)" value="返 回" />
+                </div>
+        </form>
+    </div>
+</div>

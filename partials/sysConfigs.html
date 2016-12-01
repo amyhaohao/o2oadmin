@@ -1,0 +1,59 @@
+<div>   
+    <div class="title-wrapper">            
+        <div class="title">系统配置</div>
+    </div>
+    <button class="btn btn-info" ng-click="currentIndex=-1;currentData={};showEdit=true">新增系统参数</button>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>参数名</th>
+                <th>参数值</th>
+                <th>描述</th>
+                <th>操作</th>
+            </tr>        
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in data" class="animate-fade">
+                <td>{{d.name}}</td>
+                <td>{{d.value}}</td>
+                <td>{{d.desc}}</td>
+                <td>
+                    <a ng-click="edit($index)" class="glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;
+                    <a ng-click="$parent.currentIndex=$index;$parent.showDel=true;" class="glyphicon glyphicon-remove text-danger"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>  
+    <div class="mask" ng-class="{maskShow:showDel}">
+       <div class="popup popup-sm"> 
+            <div class="center">
+                <div style="font-size:16px;margin:10px 0 30px;">确定删除该参数吗？</div>
+                <button class="btn btn-primary" ng-click="data.splice(currentIndex,1);showDel=false;">确 定</button>
+                <button class="btn btn-primary" ng-click="showDel=false;">取 消</button>
+            </div>
+            <span class="glyphicon glyphicon-remove btn-danger remove" ng-click="showDel=false"></span>
+        </div>
+    </div>
+    <div class="mask" ng-class="{maskShow:showEdit}">
+       <div class="popup">
+           <form ng-submit="save()">
+            <div class="form-element-wrapper f4">
+                <div class="l"><i>*</i>参数名</div>
+                <input type="text" class="form-control" ng-model="currentData.name" required/>
+            </div>
+            <div class="form-element-wrapper f4">
+                <div class="l"><i>*</i>参数值</div>
+                <input type="text" class="form-control" ng-model="currentData.value" required />
+            </div>
+            <div class="form-element-wrapper f4">
+                <div class="l">描述</div>
+                <input type="text" class="form-control" ng-model="currentData.desc" />
+            </div><br>
+            <div class="center">
+                <button class="btn btn-primary">确 定</button>
+            </div>
+           </form>
+            <a class="glyphicon glyphicon-remove btn-danger remove" ng-click="showEdit=false"></a>
+        </div>
+    </div>
+</div>

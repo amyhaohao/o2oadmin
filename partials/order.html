@@ -1,0 +1,87 @@
+<div class="orderView">
+    <div class="title-wrapper">            
+        <div class="title">订单详情</div>
+    </div>
+    <div class="editContainer">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-element-wrapper f5">
+                <div class="l">订单编号：</div> {{data.orderNo}}
+                </div>        
+                <div class="form-element-wrapper f5">
+                <div class="l">下单时间：</div> {{data.orderDate}}
+                </div>
+            </div>
+            <div class="col-sm-4">
+            <div class="form-element-wrapper f5">
+                <div class="l">商家：</div>
+                <a href="#!/shop/{{data.shopId}}">{{data.shop}}</a>
+            </div>
+            <div class="form-element-wrapper f5">
+                <div class="l">用户：</div> {{data.username}}
+            </div>
+            </div>  
+            <div class="col-sm-4">
+            <div class="form-element-wrapper f5">
+                <div class="l">状态：</div> {{data.status}}
+            </div>
+            <div class="form-element-wrapper f5">
+                <div class="l">支付方式：</div> {{data.paymentType}}
+            </div>
+            </div> 
+        </div>
+           
+        <div style="font-size:18px;text-align:center;padding:20px 0 10px;">收货信息</div>  
+        <div class="row">
+            <div class="col-sm-4">
+               <div class="form-element-wrapper f5">
+                <div class="l">收货人：</div> 张三
+               </div>
+            </div>
+            <div class="col-sm-4">
+            <div class="form-element-wrapper f5">
+                <div class="l">联系电话：</div> 13923453466
+            </div>
+            </div>
+            <div class="col-sm-4">
+            <div class="form-element-wrapper f5">
+                <div class="l">收货地址：</div> 上海市东方路2304号
+            </div>
+            </div>
+        </div>        
+        <div class="row">             
+            <div class="form-element-wrapper f5">
+                <div class="l">备注：</div> 备注信息备注信息备注
+            </div>
+        </div>
+                    
+                
+        <div style="font-size:18px;text-align:center;padding:20px 0 10px;">商品信息</div>              
+        <div class="tableContainer">
+            <table class="table table-striped table-hover" style="min-width:200px;">
+                <thead>
+                    <tr>
+                        <th>图片</th>
+                <th>商品名称</th>
+                <th>价格</th> 
+                <th>数量</th> 
+                    </tr>        
+                </thead>
+                <tbody>
+                    <tr ng-repeat="d in products">
+                        <td><a href="#!/product/{{d.id}}"><img my-src="d.logo" /></a></td>
+                        <td><a href="#!/product/{{d.id}}">{{d.name+d.id}}</a></td>
+                        <td>&yen; {{d.unitPrice.toFixed(2)}}</td>
+                        <td>{{d.id}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sum">
+            商品金额：<span>&yen; {{data.subTotal.toFixed(2)}}</span><br>
+            运费：<span>&yen; {{data.shipFee.toFixed(2)}}</span><br>
+            订单优惠：<span>- &yen; {{data.orderDiscount.toFixed(2)}}</span><br>
+            总金额：<span>&yen; {{(data.subTotal + data.shipFee - data.orderDiscount).toFixed(2)}}</span>
+        </div>
+    </div>
+</div>

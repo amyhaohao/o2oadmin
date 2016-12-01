@@ -1,0 +1,58 @@
+<div class="container">   
+    <div class="page-container">
+        <div class="title-wrapper">            
+            <div class="title">付款明细</div>
+        </div>
+        <div class="searchContainer">
+                                 商家：<select ng-model="search.shopId" ng-controller="ShopSelectCtrl" style="max-width:150px;">
+                      <option value="">-所有-</option>   
+                      <option ng-repeat="s in selectShops" value="{{s.id}}" ng-selected="s.id==search.shopId">{{s.name}}</option>     
+                  </select>
+                                 状态：<select ng-model="search.status">
+                      <option value="">-所有-</option>
+                      <option value="UNDERWAY">UNDERWAY</option>
+                      <option value="SUCCESS">SUCCESS</option>
+                  </select>
+                                付款申请单号：<input type="text" ng-model="search.applicationNo">
+                                订单编号：<input type="text" ng-model="search.orderNo"><br><br>
+                                开始日期：<input type="text" ng-model="search.startDate" placeholder="格式 2014-12-12" title="格式 2014-12-12">
+                                结束日期：<input type="text" ng-model="search.endDate" placeholder="格式 2014-12-12" title="格式 2014-12-12">
+             <a class="btn btn-default" ng-click="doSearch()" style="top:-2px;margin-right:0;">搜 索</a>
+        </div>
+        <table class="table table-striped table-hover article-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>金额</th>
+                <th>金额类型</th>
+                <th>订单编号</th> 
+                <th>创建时间</th>             
+                <th>完成时间</th>
+                <th>状态</th> 
+                <th>商家</th>
+                <th>付款申请单号</th>
+            </tr>        
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in data">
+                <td>{{d.id}}</td>
+                <td>{{d.amount.toFixed(2)}}</td>
+                <td>{{d.requireType=='AGENT'?'代收':'补贴'}}</td>
+                <td><a href="#!/order/{{d.orderId}}">{{d.orderNo}}</a></td>
+                <td>{{d.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{d.finishTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{d.status}}</td>
+                <td>{{(selectShops|filter:{id:d.tradeTargetId}:true)[0].name}}</td>
+                <td>{{d.applicationNo}}</td>
+            </tr>
+        </tbody>
+    </table>
+        <div>
+            <div class="pagination" ng-controller="PageCtrl">
+                <span ng-repeat="page in pages" ng-click="changePage(page.page)" ng-class="{disabled: page.page==0}">{{page.display}}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;共{{$parent.totalCount}}条/{{$parent.totalPages}}页
+            </div>
+        </div>
+    </div>
+     
+</div>

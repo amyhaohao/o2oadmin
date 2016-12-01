@@ -1,0 +1,93 @@
+<div>   
+    <div class="title-wrapper">            
+        <div class="title">系统用户
+            <a class="glyphicon glyphicon-search" ng-click="showSearch=!showSearch"></a>
+            <a class="glyphicon glyphicon-plus text-danger" href="#!/other/sysuser/0"></a>
+        </div>
+    </div>
+    <div class="mask searchMask" ng-class="{maskShow:showSearch}">
+        <div class="popup">
+            <div class="row searchContainer">
+                <div class="form-element-wrapper col-sm-3 f3">
+                    <div class="l">用户名</div>
+                    <div my-search="search.sname"></div>
+                </div>
+                <div class="form-element-wrapper col-sm-3 f3">
+                    <div class="l">角色</div>
+                    <select class="form-control" ng-model="search.role">
+                        <option value="">-所有-</option>
+                        <option value="1">管理员</option>
+                        <option value="2">运维</option>
+                    </select>
+                </div>
+                <div class="form-element-wrapper col-sm-3 f3">
+                    <div class="l">状态</div>
+                    <select class="form-control" ng-model="search.status">
+                        <option value="">-所有-</option>
+                        <option value="0">正常</option>
+                        <option value="1">禁用</option>
+                    </select>
+                </div>
+                <div class="col-sm-3 btns">
+                   <button class="btn btn-primary" ng-click="doSearch()">搜 索</button>
+                   <a class="btn btn-info btn2" href="#!/other/sysuser/0">添加用户</a>
+               </div>
+            </div>
+            <span class="glyphicon glyphicon-remove btn-danger remove" ng-click="showSearch=false"></span>
+       </div>
+    </div>   
+    <div class="tableContainer">
+        <table class="table table-striped table-hover" style="min-width:450px;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>用户名</th>
+                <th>联系电话</th>
+                <th>角色</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>        
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in data">
+                <td><a href="#!/other/sysuser/{{d.id}}">{{d.id}}</a></td>
+                <td><a href="#!/other/sysuser/{{d.id}}">{{d.name+d.id}}</a></td>
+                <td>{{d.phone}}</td>
+                <td>{{d.role==1?"管理员":"运维"}}</td>
+                <td>{{d.status==0?"正常" : "禁用"}}</td>
+                <td>
+                    <input type="button" class="btn btn-warning" value="重置密码" ng-click="$parent.showPass=true;" />
+                    <input type="button" class="btn btn-danger" value="禁用" ng-click="$parent.currentData=d;$parent.showDisabled=true;" ng-show="d.status==0"/>
+                    <input type="button" class="btn btn-success" value="启用" ng-click="$parent.currentData=d;$parent.showDisabled=true;" ng-show="d.status==1"/>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="clearfix">
+        <ul class="pagination pagination-sm" ng-controller="PageCtrl">
+           <li ng-repeat="page in pages" ng-class="{active: page.page==0}"><a ng-click="changePage(page.page)">{{page.display=="next"?"&raquo;":(page.display=="prev"?"&laquo;":page.display)}}</a></li>
+           <li class="disabled"><a>{{totalCount}}条/{{totalPages}}页</a></li>
+        </ul>
+    </div>  
+    <div class="mask" ng-class="{maskShow:showPass}">
+       <div class="popup popup-sm"> 
+            <div class="center">
+                <div style="font-size:16px;margin:10px 0 30px;">确定重置该用户的密码吗？</div>
+                <button class="btn btn-primary" ng-click="showPass=false;">确 定</button>
+                <button class="btn btn-primary" ng-click="showPass=false;">取 消</button>
+            </div>
+            <span class="glyphicon glyphicon-remove btn-danger remove" ng-click="showPass=false"></span>
+        </div>
+    </div>
+    <div class="mask" ng-class="{maskShow:showDisabled}">
+       <div class="popup popup-sm"> 
+            <div class="center">
+                <div style="font-size:16px;margin:10px 0 30px;">确定{{currentData.status==1?"启用":"禁用"}}该用户吗？</div>
+                <button class="btn btn-primary" ng-click="currentData.status=currentData.status==0?1:0;showDisabled=false;">确 定</button>
+                <button class="btn btn-primary" ng-click="showDisabled=false;">取 消</button>
+            </div>
+            <span class="glyphicon glyphicon-remove btn-danger remove" ng-click="showDisabled=false"></span>
+        </div>
+    </div> 
+</div>

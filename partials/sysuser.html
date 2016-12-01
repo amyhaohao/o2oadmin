@@ -1,0 +1,32 @@
+<div>
+    <div class="title-wrapper">            
+        <div class="title">{{id > 0 ? "编辑" : "新增"}}系统用户</div>
+    </div>
+    <div class="editContainer" style="max-width:400px;margin:0 auto;">
+        <form ng-submit="submit()">        
+            <div class="form-element-wrapper f4">
+                <div class="l"><i>*</i>用户名</div>
+                    <input class="form-control" type="text" ng-model="data.name" ng-disabled="data.id>0" required/>
+            </div>  
+            <div class="form-element-wrapper f4">
+                <div class="l">联系电话</div>
+                <input class="form-control" type="text" ng-model="data.phone"/>
+            </div>
+            <div class="form-element-wrapper f4">
+                <div class="l">角色</div>
+                <select class="form-control" ng-model="data.role">
+                    <option value="1">管理员</option>
+                    <option value="2">运维</option>     
+                </select>
+            </div>
+            <div class="form-element-wrapper f4">
+                <div class="l">禁用</div>
+                <input type="checkbox" ng-model="data.disable" />
+            </div>
+            <div class="btns">
+                <button class="btn btn-primary" type="submit">保 存</button> 
+                <input type="button" class="btn btn-danger" onclick="history.go(-1)" value="返 回" />
+            </div>
+        </form>
+    </div>
+</div>

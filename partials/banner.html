@@ -1,0 +1,39 @@
+<div>
+    <div class="title-wrapper">            
+        <div class="title">{{id > 0 ? "编辑" : "新增"}}图片</div>
+    </div>
+    <div class="editContainer">
+        <form ng-submit="submit()"> 
+            <div class="logo">
+                <div my-upload="data.img"></div>
+                    图片
+            </div>        
+            <div class="row">
+                <div class="form-element-wrapper col-sm-6">
+                    <div class="l">名称</div>  
+                    <input class="form-control" type="text" placeholder="图片名称" ng-model="data.title"/>
+                </div>
+                <div class="form-element-wrapper col-sm-6">
+                    <div class="l">链接</div>
+                    <input class="form-control" type="text" placeholder="图片点击链接" ng-model="data.link"/>
+                </div>
+                <div class="form-element-wrapper col-sm-6">
+                    <div class="l">排序</div>
+                    <input class="form-control" type="text" ng-model="data.sort" placeholder="整数"/>
+                </div>
+                <div class="form-element-wrapper col-sm-6">
+                    <div class="l">模块</div>
+                    <select class="form-control">
+                            <option value="1">首页轮播</option>   
+                <option value="2">广告位1</option>
+                <option value="3">广告位2</option>   
+                    </select>
+                </div>
+            </div>
+            <div class="btns">
+                    <button class="btn btn-primary" type="submit">保 存</button> 
+                    <input type="button" class="btn btn-danger" onclick="history.go(-1)" value="返 回" />
+            </div>
+        </form>
+    </div>
+</div>

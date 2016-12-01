@@ -1,0 +1,4 @@
+<div class="pagination">
+    <span ng-repeat="page in pages" ng-click="changePage(page.page)" ng-class="{disabled: page.page==0}">{{page.display}}</span>
+    &nbsp;&nbsp;&nbsp;&nbsp;<label ng-if="totalCount>-1">共{{totalCount}}条/{{totalPages}}页</label>
+</div>

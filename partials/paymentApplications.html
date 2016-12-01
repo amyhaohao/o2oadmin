@@ -1,0 +1,67 @@
+<div class="container">   
+    <div class="page-container">
+        <div class="title-wrapper">            
+            <div class="title">付款申请单</div>
+        </div>
+        <div class="searchContainer">
+                                 申请单号 <input type="text" ng-model="search.applicationNo">
+                                 商家 <select ng-model="search.shopId" ng-controller="ShopSelectCtrl" style="max-width:200px;">
+                      <option value="">-所有-</option>   
+                      <option ng-repeat="s in selectShops" value="{{s.id}}" ng-selected="s.id==search.shopId">{{s.name}}</option>     
+                  </select>
+                                 状态 <select ng-model="search.status">
+                      <option value="">-所有-</option>
+                      <option value="UNDERWAY">UNDERWAY</option>
+                      <option value="SUCCESS">SUCCESS</option>
+                  </select>
+                                开始日期 <input type="text" ng-model="search.startDate" placeholder="格式 2014-12-12" title="格式 2014-12-12"><span class="glyphicon glyphicon-calendar" ng-click="showCalendar($event, 'startDateCalendar', search.startDate)" style="display:none"></span>
+                                结束日期 <input type="text" ng-model="search.endDate" placeholder="格式 2014-12-12" title="格式 2014-12-12"><span class="glyphicon glyphicon-calendar" ng-click="showCalendar($event, 'endDateCalendar', search.endDate)" style="display:none"></span>
+             <button class="btn btn-default" ng-click="doSearch()" style="top:-2px;">搜 索</button><br><br>
+             <button class="btn btn-default" ng-click="cancel()">取消申请单</button>
+             <button class="btn btn-default" ng-click="complete()">完成申请单</button>
+             <form name="exportForm" action="{{apiURL+'export/paymentapplication/payment_application.xlsx'}}" method="post" target="blank">
+                 <input type="hidden" value="{{exportId}}" name="id"/>
+                 <input type="hidden" value="{{token}}" name="token"/>
+             </form>
+          <!--    <div my-calendar="startDateCalendar" setcalendar="setDate"></div>
+             <div my-calendar="endDateCalendar" setcalendar="setDate"></div> -->
+        </div>
+        <table class="table table-striped article-table">
+        <thead>
+            <tr>
+                <th><input type="checkbox" ng-click="checkAll = !checkAll"/></th>
+                <th>申请单号</th>
+                <th>商家</th>
+                <th>金额</th>
+                <th>类型</th>
+                <th>创建时间</th>             
+                <th>完成时间</th>
+                <th>状态</th> 
+                <th>银行信息</th> 
+                <th></th>
+            </tr>        
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in data">
+                <td><input ng-if="d.status=='UNDERWAY'" type="checkbox" ng-checked="checkAll" value="{{$index}}" name="checkId"/></td>
+                <td><a href="#!/payment/require/list/10/1?applicationNo={{d.applicationNo}}">{{d.applicationNo}}</a></td>
+                <td>{{(selectShops|filter:{id:d.shopId}:true)[0].name}}</td>
+                <td>{{(d.amount + d.discountAmount).toFixed(2)}}</td>
+                <td>{{d.type=='AGENT'?"代收":(d.type=="MARKETING"?"补贴":"")}}</td>
+                <td>{{d.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{d.finishTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{d.status}}</td>
+                <td>{{d.payeeBank}} {{d.payeeNo}} {{d.payeeName}}</td>
+                <td><input ng-if="d.status=='UNDERWAY'&&d.type!=null" type="button" class="btn btn-default" value="导出" ng-click="exportt(d.id)"/></td>
+            </tr>
+        </tbody>
+    </table>
+        <div>
+            <div class="pagination" ng-controller="PageCtrl">
+                <span ng-repeat="page in pages" ng-click="changePage(page.page)" ng-class="{disabled: page.page==0}">{{page.display}}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;共{{$parent.totalCount}}条/{{$parent.totalPages}}页
+            </div>
+        </div>
+    </div>
+     
+</div>

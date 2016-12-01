@@ -1,0 +1,13 @@
+<div style="border-left:1px dotted #888;padding-left:5px;margin:18px 0 5px;">
+<div ng-repeat="(key,json) in json" class="clearfix">
+    <div class="bold float-left">{{key}}</div>
+    <div class="float-left">
+        <div ng-if="isObject(json)">
+            <div ng-include src="'partials/format/1.html'"></div>
+        </div>
+        <div ng-if="!isObject(json)">
+            {{json}}
+        </div>
+    </div>
+</div>
+</div>

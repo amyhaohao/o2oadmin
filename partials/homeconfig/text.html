@@ -1,0 +1,10 @@
+<div class="textLink seperate">
+<div class="line">文&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字：<input type="text" class="form-control" value="{{configData.text}}" autocomplete="off"/></div>
+<div class="line">使用链接：<input type="checkbox" autocomplete="off" ng-checked="configData.homeLink != null"/></div>
+<div class="line">链接类型：
+    <label ng-repeat="l in linkType"><input type="radio" name="type" autocomplete="off" value="{{l[0]}}" ng-checked="configData.homeLink.linkType==l[0]"/>{{l[1]}}</label>
+    <label style="margin-right:0;"><input type="radio" ng-checked="configData.homeLink!=null&&(linkType|filter:(configData.homeLink.linkType||'tt')).length==0" name="type" value="CUSTOM" autocomplete="off"/></label>
+    <input type="text" class="form-control" value="{{(configData.homeLink!=null&&(linkType|filter:configData.homeLink.linkType).length==0)?configData.homeLink.linkType:''}}" autocomplete="off" placeholder="自定义" style="width:80px;padding:0;height:24px;"/>
+</div>
+<div class="line">链 接 值 ：<input type="text" class="form-control" value="{{configData.homeLink.linkValue}}" autocomplete="off"/></div>
+</div>

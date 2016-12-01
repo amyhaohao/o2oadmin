@@ -1,0 +1,55 @@
+<div class="promotionView">
+    <div class="title-wrapper">            
+        <div class="title">{{id > 0 ? "编辑" : "新增"}}优惠</div>
+    </div>
+    <div class="editContainer">
+        <form ng-submit="submit()">
+            <div class="row">
+                <div class="form-element-wrapper f5 col-sm-6">
+                    <div class="l"><i>*</i>优惠名称</div>
+                    <input class="form-control" type="text" ng-model="data.name" required/>
+                </div>
+                <div class="form-element-wrapper f5 col-sm-6">
+                    <div class="l">适用商家</div>
+                    <div my-search="data.shop"></div>
+                </div>         
+            </div>
+            <div class="row">
+                <div class="form-element-wrapper f5 col-sm-6">
+                    <div class="l"><i>*</i>开始日期</div>
+                    <input class="form-control" type="text" name="startDate" ng-model="data.startDate" placeholder="格式 2015-12-12" required/>
+                </div>
+                <div class="form-element-wrapper f5 col-sm-6">
+                    <div class="l"><i>*</i>结束日期</div>
+                    <input class="form-control" type="text" ng-model="data.endDate" name="endDate" placeholder="格式 2015-12-12" required/>
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-sm-6" style="padding:0;">
+                    <div class="t"><i>*</i>优惠条件</div>
+                    <div class="form-element-wrapper f5">
+                        <div class="l ls">商品金额</div>
+                        <input class="form-control" type="text" ng-model="data.subTotal" placeholder="2位小数"/>
+                    </div>
+                    <div class="form-element-wrapper f5">
+                        <input type="checkbox" ng-model="data.new"/> 新用户
+                    </div>
+                </div>
+                <div class="col-sm-6" style="padding:0;">
+                    <div class="t"><i>*</i>优惠内容</div>
+                    <div class="form-element-wrapper f5">
+                        <div class="l">优惠金额</div>
+                        <input class="form-control" type="text" ng-model="data.amount" placeholder="2位小数"/>
+                    </div>
+                    <div class="form-element-wrapper f5">
+                        <input type="checkbox" ng-model="data.ship"/> 免运费
+                    </div>
+                </div>
+            </div>    
+            <div class="btns">
+                <button class="btn btn-primary" type="submit">保 存</button> 
+                <input type="button" class="btn btn-danger" onclick="history.go(-1)" value="返 回" />
+            </div>
+        </form>
+    </div>
+</div>

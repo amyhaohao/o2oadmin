@@ -1,0 +1,129 @@
+<div class="ordersView">   
+    <div class="title-wrapper">            
+        <div class="title">订单管理
+            <a class="glyphicon glyphicon-search" ng-click="showSearch=!showSearch"></a>
+            <a class="glyphicon glyphicon-share text-danger" onclick="$('#exportForm')[0].click()"></a>
+        </div>
+    </div>
+    <div class="mask searchMask" ng-class="{maskShow:showSearch}">
+       <div class="popup">
+           <div class="row searchContainer">
+                <div class="form-element-wrapper col-sm-4 col-md-3">
+                    <div class="l">订单编号</div>
+                    <div my-search="search.sorderNo"></div>
+                </div>
+                <div class="form-element-wrapper col-sm-4 col-md-3">
+                    <div class="l">用户</div>
+                    <div my-search="search.username"></div>
+                </div>
+                <div class="form-element-wrapper col-sm-4 col-md-3">
+                    <div class="l">商家</div>
+                    <div my-search="search.shop"></div>
+                </div>
+                <div class="form-element-wrapper col-sm-4 col-md-3">           
+                    <div class="l">起始时间</div><input type="text" name="sstartDate" ng-model="search.sstartDate" placeholder="格式 2014-12-12" class="form-control">
+                </div>
+                <div class="form-element-wrapper col-sm-4 col-md-3">          
+                    <div class="l">截止时间</div><input type="text" name="sendDate" ng-model="search.sendDate" placeholder="格式 2014-12-12" class="form-control">
+                </div>
+                <div class="form-element-wrapper col-sm-4 col-md-3">
+                    <div class="l">状态</div>
+                    <select ng-model="search.status" class="form-control">
+                      <option value="">-所有-</option>
+                      <option value="待支付">待支付</option>
+                      <option value="待发货">待发货</option>
+                      <option value="已发货">已发货</option>
+                      <option value="已取消">已取消</option>
+                      <option value="已完成">已完成</option>
+                      <option value="待退款">待退款</option>
+                    </select>
+                </div>
+                <div class="form-element-wrapper col-sm-4 col-md-3">            
+                    <div class="l">支付方式</div><select ng-model="search.paymentType" class="form-control">
+                      <option value="">-所有-</option>
+                      <option value="在线支付">在线支付</option>
+                      <option value="货到付款">货到付款</option>
+                    </select>
+                </div>
+                <div class="col-sm-3 btns col-md-3">
+                   <button class="btn btn-primary" ng-click="doSearch()">搜 索</button>
+                   <button class="btn btn-info btn2" onclick="$('#exportForm')[0].click()">导 出</button>
+                </div>
+            </div>
+            <span class="glyphicon glyphicon-remove btn-danger remove" ng-click="showSearch=false"></span>
+        </div>
+    </div>
+    <a href="json/test.xlsx" target="_blank" id="exportForm"></a>
+    <div class="tableContainer">
+        <table class="table table-striped table-hover" style="min-width:900px">
+        <thead>
+            <tr>
+                <th>订单编号</th>
+                <th>下单时间</th>
+                <th>用户</th> 
+                <th>商品金额</th>
+                <th>运费</th>
+                <th>订单优惠</th>
+                <th>总金额</th>
+                <th>支付方式</th>
+                <th>状态</th>
+                <th>商家</th>       
+<!--                <th>操作</th>      -->
+            </tr>        
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in data" class="animate-fade">
+                <td>
+                  <a href="#!/order/{{d.id}}">{{d.orderNo}}</a>
+                </td>
+                <td>{{d.orderDate}}</td>
+                <td>{{d.username}}</td>
+                <td>&yen; {{d.subTotal.toFixed(2)}}</td>
+                <td>&yen; {{d.shipFee.toFixed(2)}}</td>
+                <td>- &yen; {{(d.orderDiscount.toFixed(2))}}</td>
+                <td>&yen; {{(d.subTotal + d.shipFee - d.orderDiscount).toFixed(2)}}</td>
+                <td>{{d.paymentType}}</td>
+                <td>{{d.status}}</td>
+                <td><a href="#!/shop/{{d.shopId}}">{{d.shop}}</a></td>
+<!--
+                <td>
+                  <input type="button" class="btn btn-warning" value="发货" ng-click="$parent.currentData=d;$parent.showShip=true;" ng-show="d.status=='待发货'"/>
+                  <input type="button" class="btn btn-danger" value="退款" ng-click="d.status='已取消';" ng-show="d.status=='待退款'"/>
+                </td>
+-->
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="clearfix">
+        <ul class="pagination pagination-sm" ng-controller="PageCtrl">
+           <li ng-repeat="page in pages" ng-class="{active: page.page==0}"><a ng-click="changePage(page.page)">{{page.display=="next"?"&raquo;":(page.display=="prev"?"&laquo;":page.display)}}</a></li>
+           <li class="disabled"><a>{{totalCount}}条/{{totalPages}}页</a></li>
+        </ul>
+    </div>
+    <div class="mask" ng-class="{maskShow:showShip}">
+       <div class="popup">
+          <div class="form-element-wrapper f4"><div class="l">快递公司</div>
+                   <select class="form-control">
+                      <option value="">圆通快递</option>
+                      <option value="">申通快递</option>
+                      <option value="">EMS</option>
+                      <option value="">顺风速递</option>
+                   </select></div>
+          <div class="form-element-wrapper f4"><div class="l">快递单号</div>
+                   <input class="form-control" type="text"/>
+          </div> 
+          <div class="center" style="margin-top:10px;"><button class="btn btn-primary" ng-click="currentData.status='已发货';showShip=false;">发 货</button></div>
+          <span class="glyphicon glyphicon-remove btn-danger remove" ng-click="showShip=false"></span>
+        </div>
+    </div>
+    <div class="mask" ng-class="{maskShow:showFund}">
+       <div class="popup">
+          <div class="form-element-wrapper f4"><div class="l">退款金额</div>
+                   <input class="form-control" type="text"/>
+          </div> 
+          <div class="center" style="margin-top:10px;"><button class="btn btn-primary" ng-click="currentData.status='已取消';showFund=false;">退 款</button></div>
+          <span class="glyphicon glyphicon-remove btn-danger remove" ng-click="showFund=false"></span>
+        </div>
+    </div>
+</div>

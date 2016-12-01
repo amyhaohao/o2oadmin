@@ -1,0 +1,80 @@
+<div>   
+    <div class="title-wrapper">            
+        <div class="title">优惠管理
+            <a class="glyphicon glyphicon-search" ng-click="showSearch=!showSearch"></a>
+            <a class="glyphicon glyphicon-plus text-danger" href="#!/promotion/0"></a>
+        </div>
+    </div>
+    <div class="mask searchMask" ng-class="{maskShow:showSearch}">
+        <div class="popup">
+            <div class="row searchContainer">
+                <div class="form-element-wrapper col-sm-4 col-md-3 f4">
+                    <div class="l">优惠名称</div>
+                    <div my-search="search.sname"></div>
+                </div>
+                <div class="form-element-wrapper col-sm-4 col-md-3 f4">
+                    <div class="l">开始日期</div>
+                    <input type="text" ng-model="search.sstartDate" name="sstartDate" placeholder="格式 2014-12-12" class="form-control">
+                </div>
+                <div class="form-element-wrapper col-sm-4 col-md-3 f4">
+                    <div class="l">结束日期</div>
+                    <input type="text" ng-model="search.sendDate" name="sendDate" placeholder="格式 2014-12-12" class="form-control">
+                </div>
+                <div class="form-element-wrapper col-sm-4 col-md-3 f4">
+                    <div class="l">商家名称</div>
+                    <div my-search="search.sshop"></div>
+                </div>
+                <div class="col-sm-4 btns col-md-3">
+                   <button class="btn btn-primary" ng-click="doSearch()">搜 索</button>
+                   <a class="btn btn-info btn2" href="#!/promotion/0">添加优惠</a>
+               </div>
+            </div>
+            <span class="glyphicon glyphicon-remove btn-danger remove" ng-click="showSearch=false"></span>
+       </div>
+    </div>
+
+    <div class="tableContainer">
+        <table class="table table-striped table-hover" style="min-width:520px;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>优惠名称</th>
+                <th>优惠金额</th>
+                <th>开始日期</th>
+                <th>结束日期</th>
+                <th>商家名称</th>
+                <th>操作</th>
+            </tr>        
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in data" class="animate-fade">
+                <td><a href="#!/promotion/{{d.id}}">{{d.id}}</a></td>
+                <td><a href="#!/promotion/{{d.id}}">{{d.name}}</a></td>
+                <td>&yen; {{d.amount.toFixed(2)}}</td>
+                <td>{{d.startDate}}</td>
+                <td>{{d.endDate}}</td>
+                <td>{{d.sshop||d.shop||"--"}}</td>
+                <td>
+                    <a ng-click="$parent.currentIndex=$index;$parent.showStatus=true;" class="glyphicon glyphicon-remove text-danger"></a>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="clearfix">
+        <ul class="pagination pagination-sm" ng-controller="PageCtrl">
+           <li ng-repeat="page in pages" ng-class="{active: page.page==0}"><a ng-click="changePage(page.page)">{{page.display=="next"?"&raquo;":(page.display=="prev"?"&laquo;":page.display)}}</a></li>
+           <li class="disabled"><a>{{totalCount}}条/{{totalPages}}页</a></li>
+        </ul>
+    </div>
+    <div class="mask" ng-class="{maskShow:showStatus}">
+       <div class="popup popup-sm"> 
+            <div class="center">
+                <div style="font-size:16px;margin:10px 0 30px;">确定删除该优惠吗？</div>
+                <button class="btn btn-primary" ng-click="data.splice(currentIndex,1);showStatus=false;">确 定</button>
+                <button class="btn btn-primary" ng-click="showStatus=false;">取 消</button>
+            </div>
+            <span class="glyphicon glyphicon-remove btn-danger remove" ng-click="showStatus=false"></span>
+        </div>
+    </div>
+</div>

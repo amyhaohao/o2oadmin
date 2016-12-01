@@ -1,0 +1,10 @@
+[{"id":1, "name":"商品名称", "logo":"images/44.png", "categoryName":"蔬菜", "unitPrice":20, "unit":"1kg", "shop":"店铺名称", "shopId":1, "onSale":1},
+{"id":2, "name":"商品名称", "logo":"images/44.png", "categoryName":"水果", "unitPrice":10, "unit":"500g", "shop":"店铺名称", "shopId":2, "onSale":1},
+{"id":3, "name":"商品名称", "logo":"images/44.png", "categoryName":"肉类", "unitPrice":9.9, "unit":"个", "shop":"店铺名称", "shopId":3, "onSale":1},
+{"id":4, "name":"商品名称", "logo":"images/44.png", "categoryName":"水产", "unitPrice":29.9, "unit":"袋", "shop":"店铺名称", "shopId":4, "onSale":0},
+ {"id":5, "name":"商品名称", "logo":"images/44.png", "categoryName":"蔬菜", "unitPrice":45, "unit":"包", "shop":"店铺名称", "shopId":5, "onSale":1},
+ {"id":6, "name":"商品名称", "logo":"images/44.png", "categoryName":"水果", "unitPrice":30, "unit":"10个", "shop":"店铺名称", "shopId":1, "onSale":1},
+ {"id":7, "name":"商品名称", "logo":"images/44.png", "categoryName":"肉类", "unitPrice":54, "unit":"250g", "shop":"店铺名称", "shopId":1, "onSale":1},
+ {"id":8, "name":"商品名称", "logo":"images/44.png", "categoryName":"蔬菜", "unitPrice":26, "unit":"公斤", "shop":"店铺名称", "shopId":2, "onSale":0},
+ {"id":9, "name":"商品名称", "logo":"images/44.png", "categoryName":"水果", "unitPrice":433, "unit":"斤", "shop":"店铺名称", "shopId":2, "onSale":1},
+{"id":10, "name":"商品名称", "logo":"images/44.png", "categoryName":"肉类", "unitPrice":98.5, "unit":"个", "shop":"店铺名称", "shopId":3, "onSale":1}]

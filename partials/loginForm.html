@@ -1,0 +1,23 @@
+<div style="margin-top:100px;">   
+        <div class="title-wrapper">            
+            <div class="title" style="padding-left:30px;">用户登录</div>            
+        </div>
+        <div style="width:90%;max-width:350px;margin:30px auto;">
+            <form ng-submit="submit()">
+                <div class="form-element-wrapper f3" style="margin-bottom:15px;">
+                    <div class="l">用户名</div>
+                    <input class="form-control" type="text" ng-model="data.userName" required autocomplete="off"/>
+                </div>
+                <div class="form-element-wrapper f3" style="margin-bottom:15px;">
+                    <div class="l">密&nbsp;&nbsp;&nbsp;码</div>
+                    <input class="form-control" type="password" ng-model="data.password" required autocomplete="off"/>            
+                </div>
+                <div class="form-element-wrapper f3">
+                    <button class="btn btn-primary" type="submit" style="width:100%;font-size:18px;">登 录</button> 
+                </div>
+            </form>
+        </div>
+    <style>
+        html{background:#f8f8f8;}
+    </style>
+</div>

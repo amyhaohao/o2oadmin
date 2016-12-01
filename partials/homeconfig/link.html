@@ -1,0 +1,9 @@
+<div class="link seperate">
+<div class="line">图片地址：<input type="text" class="form-control" value="{{configData.imageUrl}}" autocomplete="off"/></div>
+<div class="line">链接类型：
+    <label ng-repeat="l in linkType"><input type="radio" ng-checked="configData.homeLink.linkType==l[0]" name="type{{$parent.$index}}" value="{{l[0]}}" autocomplete="off"/>{{l[1]}}</label>
+    <label style="margin-right:0;"><input type="radio" ng-checked="configData.homeLink.linkType==''||(linkType|filter:configData.homeLink.linkType).length==0" name="type{{$index}}" value="CUSTOM" autocomplete="off"/></label>
+    <input type="text" class="form-control" value="{{(linkType|filter:configData.homeLink.linkType).length==0?configData.homeLink.linkType:''}}" autocomplete="off" placeholder="自定义" style="width:80px;padding:0;height:24px;"/>
+</div>
+<div class="line">链 接 值 ：<input type="text" class="form-control" value="{{configData.homeLink.linkValue}}" autocomplete="off"/></div>
+</div>
