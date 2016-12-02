@@ -1,6 +1,6 @@
 <div>
     <div class="title-wrapper">            
-        <div class="title">{{id > 0 ? "编辑" : "新增"}}系统用户</div>
+        <div class="title" style="padding-left:40px;">{{id > 0 ? "编辑" : "新增"}}系统用户</div>
     </div>
     <div class="editContainer" style="max-width:400px;margin:0 auto;">
         <form ng-submit="submit()">        
@@ -23,7 +23,7 @@
                 <div class="l">禁用</div>
                 <input type="checkbox" ng-model="data.disable" />
             </div>
-            <div class="btns">
+            <div class="btns" style="padding-left:40px">
                 <button class="btn btn-primary" type="submit">保 存</button> 
                 <input type="button" class="btn btn-danger" onclick="history.go(-1)" value="返 回" />
             </div>
